@@ -117,5 +117,5 @@ build-commands:
     --add-mime-type="image/x-xwindowdump"
     "XnSketch/XnSketch.desktop";
     cat "XnSketch-desktop.txt" >> "XnSketch/XnSketch.desktop";
-    install -p -D -m 0644 "XnSketch/XnSketch.desktop" -t "${FLATPAK_DEST}/share/applications/";
+    install -p -D -m 0644 "XnSketch/XnSketch.desktop" "${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop";
   - install -p -D -m 0644 "${FLATPAK_ID}.appdata.xml" -t "${FLATPAK_DEST}/share/appdata/";
