@@ -2,39 +2,21 @@ name: XnSketch
 buildsystem: simple
 sources:
   - type: archive
-    url: https://download.xnview.com/old_versions/XnSketch-118-linux.tgz
-    sha256: bfc35afc4e333db3cc298bffda1f35beca45e8b1b693bc9a45c5bceb161ceae2
-    strip-components: 0
-    only-arches: ['i386']
-  - type: archive
     url: https://download.xnview.com/old_versions/XnSketch-118-linux-x64.tgz
     sha256: 15273b7e38bcac2b4a34034e383547243b3d086ac57259629e49afabe4adace5
     strip-components: 0
-    only-arches: ['x86_64']
   # For missing dependencies
   # /app/XnSketch/XnSketch: error while loading shared libraries: libicui18n.so.54: cannot open shared object file: No such file or directory
   # QLibraryPrivate::loadPlugin failed on "/app/XnSketch/lib/imageformats/libqsvg.so" : "Cannot load library /app/XnSketch/lib/imageformats/libqsvg.so: (libQt5Svg.so.5: cannot open shared object file: No such file or directory)"
   - type: archive
-    url: https://download.xnview.com/old_versions/XnConvert-173-linux.tgz
-    sha256: 4a75dadb22020ed58a7e08e9d522fc3aa8e9f52bd7a4e0bc384774d685d8b01e
-    strip-components: 0
-    only-arches: ['i386']
-  - type: archive
     url: https://download.xnview.com/old_versions/XnConvert-173-linux-x64.tgz
     sha256: fbaf9e284de0973b0338f88ecda525eb5ec4b02f7b6d1305f4dc472aad2778ad
     strip-components: 0
-    only-arches: ['x86_64']
   # Segmentation fault (core dumped)
-  - type: archive
-    url: https://download.xnview.com/old_versions/XnViewMP-083-linux.tgz
-    sha256: 95eac6b118d49e6baaa61e82516004b84ca90adda186e18a5cbd8c2bf2e88235
-    strip-components: 0
-    only-arches: ['i386']
   - type: archive
     url: https://download.xnview.com/old_versions/XnViewMP-083-linux-x64.tgz
     sha256: d4bbc01ca8248e28b36f051aa427f9c9257367284a1130e473c280b66d466d0c
     strip-components: 0
-    only-arches: ['x86_64']
   - type: patch
     path: xnsketch-1.18-wrapper.patch
     strip-components: 0
