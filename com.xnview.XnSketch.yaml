@@ -1,6 +1,6 @@
 app-id: com.xnview.XnSketch
 runtime: org.freedesktop.Platform
-runtime-version: '18.08'
+runtime-version: '20.08'
 sdk: org.freedesktop.Sdk
 command: xnsketch
 finish-args:
@@ -13,11 +13,6 @@ finish-args:
   - --filesystem=home
   # Network access
   #- --share=network
-  # Dconf access
-  - --filesystem=xdg-run/dconf
-  - --filesystem=~/.config/dconf:ro
-  - --talk-name=ca.desrt.dconf
-  - --env=DCONF_USER_CONFIG_DIR=.config/dconf
   # OpenGL access
   - --device=dri
 tags:
@@ -29,6 +24,7 @@ modules:
   # to load PostScript-based file formats (PS + EPS + AI) as well as PDF
   # for display, printing, and conversion
   - ghostscript.yaml
+  - krb5.yaml
   - XnSketch.yaml
 cleanup:
   - /share/man
