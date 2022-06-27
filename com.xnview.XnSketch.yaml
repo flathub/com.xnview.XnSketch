@@ -1,31 +1,106 @@
 app-id: com.xnview.XnSketch
 runtime: org.freedesktop.Platform
-runtime-version: '20.08'
+runtime-version: '21.08'
 sdk: org.freedesktop.Sdk
 command: xnsketch
 finish-args:
   # X11 + XShm access
   - --share=ipc
   - --socket=x11
-  # Wayland access
-  - --socket=wayland
   # Filesystem access
   - --filesystem=home
-  # Network access
-  #- --share=network
   # OpenGL access
   - --device=dri
 tags:
   - proprietary
 modules:
-  - shared-modules/gtk2/gtk2.json
-  # to resize icon
-  - ImageMagick.yaml
-  # to load PostScript-based file formats (PS + EPS + AI) as well as PDF
-  # for display, printing, and conversion
-  - ghostscript.yaml
-  - krb5.yaml
-  - XnSketch.yaml
+  - name: ImageMagick
+    config-opts:
+      - --enable-shared
+      - --disable-static
+      - --disable-docs
+      - --with-modules
+      - --with-threads
+      - --with-png
+    sources:
+      - type: archive
+        url: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-37.tar.gz
+        sha256: a54888a1a46dbb808705a3e6c6b5ecb93ee30189a8ae6ea0f02300a0ab0d0996
+    cleanup: ['*']
+  - name: ghostscript
+    config-opts:
+      - --enable-dynamic
+      - --disable-cups
+      - --disable-dbus
+      - --disable-gtk
+      - --with-system-libtiff
+      - --with-drivers=FILES
+    sources:
+      - type: archive
+        url: https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs9561/ghostscript-9.56.1.tar.xz
+        sha256: d43406805650009b42c3d5f6dc535233454533c1e27c13a77dd1d462a056b8e4
+      - type: shell
+        commands:
+         - "rm -rf lcms2mt jpeg libpng openjpeg zlib"
+    cleanup:
+      - /share/doc
+  - name: krb5
+    subdir: "src"
+    config-opts:
+      - --disable-static
+      - --disable-rpath
+    sources:
+      - type: archive
+        url: https://kerberos.org/dist/krb5/1.20/krb5-1.20.tar.gz
+        sha256: 7e022bdd3c851830173f9faaa006a230a0e0fdad4c953e85bff4bf0da036e12f
+  - name: XnSketch
+    buildsystem: simple
+    sources:
+      - type: archive
+        url: https://download.xnview.com/XnSketch-linux-x64.tgz
+        sha256: 15273b7e38bcac2b4a34034e383547243b3d086ac57259629e49afabe4adace5
+        strip-components: 0
+      # For missing dependency libicui18n.so.54, keep this version fixed
+      - type: archive
+        url: https://download.xnview.com/old_versions/XnConvert-173-linux-x64.tgz
+        sha256: fbaf9e284de0973b0338f88ecda525eb5ec4b02f7b6d1305f4dc472aad2778ad
+        strip-components: 0
+      # Segmentation fault (core dumped)
+      - type: archive
+        url: https://download.xnview.com/old_versions/XnViewMP-083-linux-x64.tgz
+        sha256: d4bbc01ca8248e28b36f051aa427f9c9257367284a1130e473c280b66d466d0c
+        strip-components: 0
+      - type: file
+        path: app-xnsketch-512.png
+      - type: file
+        path: com.xnview.XnSketch.desktop
+      - type: file
+        path: com.xnview.XnSketch.appdata.xml
+    build-commands:
+      - cp -a "XnSketch" "${FLATPAK_DEST}/"
+      - ln -s "${FLATPAK_DEST}/XnSketch/xnsketch.sh" "${FLATPAK_DEST}/bin/xnsketch"
+      - |
+        icon_in="app-xnsketch-512.png";
+        icon_out="${FLATPAK_ID}.png";
+        for s in {64,128,256}; do
+            convert -background none -density 1024 -resize "${s}x${s}" "${icon_in}" "${icon_out}";
+            install -Dm0644 "${icon_out}" -t "${FLATPAK_DEST}/share/icons/hicolor/${s}x${s}/apps/";
+        done;
+        install -Dm0644 "${icon_in}" "${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/${icon_out}";
+      - cp -a "XnConvert/lib"/libicu*.so* "${FLATPAK_DEST}/XnSketch/lib/";
+      - |
+        for file in "XnConvert/lib"/libQt5*.so*; do
+          [[ -f "${file}" ]] || continue;
+          f="$( basename "${file}" )";
+          [[ ! -f "${FLATPAK_DEST}/XnSketch/lib/${f}" ]] || continue;
+        cp -a "${file}" "${FLATPAK_DEST}/XnSketch/lib/";
+        done;
+      - |
+        install -d "${FLATPAK_DEST}/XnSketch/lib/imageformats/";
+        cp -a "XnView/lib/imageformats"/*.so* "${FLATPAK_DEST}/XnSketch/lib/imageformats/";
+    post-install:
+      - install -Dm0644 "com.xnview.XnSketch.desktop" -t "${FLATPAK_DEST}/share/applications/"
+      - install -Dm0644 "com.xnview.XnSketch.appdata.xml" -t "${FLATPAK_DEST}/share/appdata/"
+
 cleanup:
   - /share/man
-  - /XnSketch/XnSketch.desktop*
