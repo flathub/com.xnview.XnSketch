@@ -1,3 +1,16 @@
+[Desktop Entry]
+Encoding=UTF-8
+Terminal=false
+TryExec=xnsketch
+Exec=xnsketch %F
+Icon=com.xnview.XnSketch
+StartupWMClass=XnSketch
+Type=Application
+Categories=Graphics;
+StartupNotify=true
+Name=XnSketch
+GenericName=Image Enhancer
+Comment=Turn your photos into cartoon or sketch images
 Keywords=XnView;Image;
 Keywords[bs]=XnView;slika;
 Keywords[ca]=XnView;Imatge;
@@ -27,3 +40,4 @@ Keywords[sv]=XnView;Bild;
 Keywords[tr]=XnView;Resim;
 Keywords[zh_CN]=XnView;Image;图像;照片;
 Keywords[zh_TW]=XnView;Image;影像;圖像;
+MimeType=image/bmp;image/g3fax;image/gif;image/jpeg;image/pcx;image/png;image/svg+xml;image/tiff;image/x-compressed-xcf;image/x-fits;image/x-icon;image/x-portable-anymap;image/x-portable-bitmap;image/x-portable-graymap;image/x-portable-pixmap;image/x-psd;image/x-sgi;image/x-tga;image/x-wmf;image/x-xbitmap;image/x-xcf;image/x-xpixmap;image/x-xwindowdump
