@@ -1,6 +1,6 @@
 app-id: com.xnview.XnSketch
 runtime: org.freedesktop.Platform
-runtime-version: '21.08'
+runtime-version: '22.08'
 sdk: org.freedesktop.Sdk
 command: xnsketch
 finish-args:
@@ -23,9 +23,10 @@ modules:
       - --with-threads
       - --with-png
     sources:
-      - type: archive
-        url: https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.0-37.tar.gz
-        sha256: a54888a1a46dbb808705a3e6c6b5ecb93ee30189a8ae6ea0f02300a0ab0d0996
+      - type: git
+        url: https://github.com/ImageMagick/ImageMagick.git
+        tag: 7.1.1-12
+        commit: a09d8dd5e3a92362cf70c184670b23163587e6f8
     cleanup: ['*']
   - name: ghostscript
     config-opts:
@@ -37,11 +38,11 @@ modules:
       - --with-drivers=FILES
     sources:
       - type: archive
-        url: https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs9561/ghostscript-9.56.1.tar.xz
-        sha256: d43406805650009b42c3d5f6dc535233454533c1e27c13a77dd1d462a056b8e4
+        url: https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs10012/ghostscript-10.01.2.tar.xz
+        sha256: 48d079242a2ca02a2e47a76a52cdfa818b2ad769c2bab00ad0497dd13560e7e7
       - type: shell
         commands:
-         - "rm -rf lcms2mt jpeg libpng openjpeg zlib"
+         - "rm -rf tesseract leptonica gpdl cups/libs jpeg libpng openjpeg tiff zlib"
     cleanup:
       - /share/doc
   - name: krb5
@@ -51,8 +52,8 @@ modules:
       - --disable-rpath
     sources:
       - type: archive
-        url: https://kerberos.org/dist/krb5/1.20/krb5-1.20.tar.gz
-        sha256: 7e022bdd3c851830173f9faaa006a230a0e0fdad4c953e85bff4bf0da036e12f
+        url: https://kerberos.org/dist/krb5/1.21/krb5-1.21.tar.gz
+        sha256: 69f8aaff85484832df67a4bbacd99b9259bd95aab8c651fbbe65cdc9620ea93b
   - name: XnSketch
     buildsystem: simple
     sources:
@@ -62,12 +63,12 @@ modules:
         strip-components: 0
       # For missing dependency libicui18n.so.54, keep this version fixed
       - type: archive
-        url: https://download.xnview.com/old_versions/XnConvert-173-linux-x64.tgz
+        url: https://download.xnview.com/old_versions/XnConvert/XnConvert-1.73-linux-x64.tgz
         sha256: fbaf9e284de0973b0338f88ecda525eb5ec4b02f7b6d1305f4dc472aad2778ad
         strip-components: 0
       # Segmentation fault (core dumped)
       - type: archive
-        url: https://download.xnview.com/old_versions/XnViewMP-083-linux-x64.tgz
+        url: https://download.xnview.com/old_versions/XnView_MP/XnView_MP-0.83-linux-x64.tgz
         sha256: d4bbc01ca8248e28b36f051aa427f9c9257367284a1130e473c280b66d466d0c
         strip-components: 0
       - type: file
