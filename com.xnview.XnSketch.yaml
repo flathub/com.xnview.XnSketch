@@ -30,7 +30,6 @@ modules:
     cleanup: ['*']
   - name: ghostscript
     config-opts:
-      - --enable-dynamic
       - --disable-cups
       - --disable-dbus
       - --disable-gtk
