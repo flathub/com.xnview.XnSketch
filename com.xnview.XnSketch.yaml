@@ -23,11 +23,15 @@ modules:
       - --with-threads
       - --with-png
     sources:
-      - type: git
-        url: https://github.com/ImageMagick/ImageMagick.git
-        tag: 7.1.1-12
-        commit: a09d8dd5e3a92362cf70c184670b23163587e6f8
+      - type: archive
+        url: https://github.com/ImageMagick/ImageMagick/archive/7.1.1-12.tar.gz
+        sha256: 51567d11fcbca5bd591d191ce9fdf821e2ed1b12c1ad8bc2a2f13da5c6313f33
+        x-checker-data:
+          type: anitya
+          project-id: 1372
+          url-template: https://github.com/ImageMagick/ImageMagick/archive/$version.tar.gz
     cleanup: ['*']
+
   - name: ghostscript
     config-opts:
       - --disable-cups
@@ -39,11 +43,16 @@ modules:
       - type: archive
         url: https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs10012/ghostscript-10.01.2.tar.xz
         sha256: 48d079242a2ca02a2e47a76a52cdfa818b2ad769c2bab00ad0497dd13560e7e7
+        x-checker-data:
+          type: anitya
+          project-id: 1157
+          url-template: https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs${major}0$minor$patch/ghostscript-$version.tar.xz
       - type: shell
         commands:
-         - "rm -rf tesseract leptonica gpdl cups/libs jpeg libpng openjpeg tiff zlib"
+         - rm -rf tesseract leptonica gpdl cups/libs jpeg libpng openjpeg tiff zlib
     cleanup:
       - /share/doc
+
   - name: krb5
     subdir: "src"
     config-opts:
@@ -53,10 +62,16 @@ modules:
       - --disable-rpath
     sources:
       - type: archive
-        url: https://kerberos.org/dist/krb5/1.21/krb5-1.21.tar.gz
-        sha256: 69f8aaff85484832df67a4bbacd99b9259bd95aab8c651fbbe65cdc9620ea93b
+        url: https://kerberos.org/dist/krb5/1.21/krb5-1.21.1.tar.gz
+        sha256: 7881c3aaaa1b329bd27dbc6bf2bf1c85c5d0b6c7358aff2b35d513ec2d50fa1f
+        x-checker-data:
+          type: html
+          url: https://kerberos.org/dist/
+          version-pattern: Kerberos V5 Release ([\d\.-]*) - current release
+          url-template: https://kerberos.org/dist/krb5/$version0.$version1/krb5-$version.tar.gz
     cleanup:
       - /bin
+
   - name: XnSketch
     buildsystem: simple
     sources:
@@ -64,6 +79,9 @@ modules:
         url: https://download.xnview.com/XnSketch-linux-x64.tgz
         sha256: 15273b7e38bcac2b4a34034e383547243b3d086ac57259629e49afabe4adace5
         strip-components: 0
+        x-checker-data:
+          type: rotating-url
+          url: https://download.xnview.com/XnSketch-linux-x64.tgz
       # For missing dependency libicui18n.so.54, keep this version fixed
       - type: archive
         url: https://download.xnview.com/old_versions/XnConvert/XnConvert-1.73-linux-x64.tgz
