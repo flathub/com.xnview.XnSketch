@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
   <id>com.xnview.XnSketch</id>
-  <metadata_license>CC0</metadata_license>
+  <metadata_license>CC0-1.0</metadata_license>
   <project_license>LicenseRef-proprietary</project_license>
   <name>XnSketch</name>
   <summary>Turn your photos into cartoon or sketch images</summary>
@@ -23,6 +23,9 @@
   <url type="donation">https://www.xnview.com/</url>
   <url type="homepage">https://www.xnview.com/en/xnsketch/</url>
   <url type="contact">https://www.xnview.com/en/about/</url>
+  <url type="translate">https://newsgroup.xnview.com/viewforum.php?f=81</url>
+  <url type="help">https://newsgroup.xnview.com/viewforum.php?f=81</url>
+  <update_contact>scx[dot]mail[at]gmail.com</update_contact>
   <screenshots>
     <screenshot type="default">
       <image>https://raw.githubusercontent.com/flathub/com.xnview.XnSketch/master/screenshots/Screenshot1.png</image>
@@ -38,8 +41,8 @@
     <id>XnSketch.desktop</id>
   </provides>
   <launchable type="desktop-id">com.xnview.XnSketch.desktop</launchable>
-  <content_rating type="oars-1.0" />
+  <content_rating type="oars-1.1"/>
   <releases>
-    <release version="1.18" date="2016-04-25" />
+    <release date="2016-04-25" version="1.18"/>
   </releases>
 </component>
