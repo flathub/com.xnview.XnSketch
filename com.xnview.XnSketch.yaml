@@ -24,8 +24,8 @@ modules:
       - --with-png
     sources:
       - type: archive
-        url: https://github.com/ImageMagick/ImageMagick/archive/7.1.2-16.tar.gz
-        sha256: aadfa67a104d14a35339de0f2cc286c973a0f43329770c69e9667a22208750fb
+        url: https://github.com/ImageMagick/ImageMagick/archive/7.1.2-17.tar.gz
+        sha256: 4ff65e73c3642481e9e3db0d80a646288a5be77e3372ba2ddc49d869657ca0c6
         x-checker-data:
           type: anitya
           project-id: 1372
@@ -41,8 +41,8 @@ modules:
       - --with-drivers=FILES
     sources:
       - type: archive
-        url: https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs10060/ghostscript-10.06.0.tar.xz
-        sha256: 64352648c2c081c8a9fb1a12dc1965e01ead7c57f58b72d1b54f6ef1cef3c561
+        url: https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs10070/ghostscript-10.07.0.tar.xz
+        sha256: ddace4e1721f967a55039baff564840225e0baa1d4f5432247ca1ccd1473b7c1
         x-checker-data:
           type: anitya
           project-id: 1157
